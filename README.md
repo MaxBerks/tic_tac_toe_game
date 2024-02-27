@@ -7,6 +7,7 @@ This project is a simple yet engaging Tic Tac Toe game built with React. It's de
 - **Interactive 3x3 game board**: A simple, user-friendly interface.
 - **Player turn indication**: Easily see whose turn it is (X or O).
 - **Win detection**: Automatically detects and announces the winner.
+- **Sound effects**: Every player's turn and the end of the game is accompanied by a sound effect.
 
 ## Installation
 

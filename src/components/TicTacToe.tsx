@@ -3,6 +3,12 @@ import Board from "./Board";
 import GameOver from "./GameOver";
 import Reset from "./Reset";
 
+import endGameSoundAsset from '../sounds/end_game_sound.mp3'
+import clickSoundAsset from '../sounds/click_sound.wav'
+
+const endGameSound = new Audio(endGameSoundAsset);
+const clickSound = new Audio(clickSoundAsset);
+
 export enum PlayerTurn {
     PLAYER_X = 'X',
     PLAYER_O = 'O',
@@ -78,6 +84,18 @@ function TicTacToe() {
     useEffect(() => {
         checkWinner(tiles, setStrikeClass, setGameState);
     }, [tiles]);
+
+    useEffect(() => {
+        if(tiles.some(tile => tile !== null)) {
+            clickSound.play();
+        }
+    }, [tiles]);
+
+    useEffect(() => {
+        if(gameState !== GameState.IN_PROGRESS) {
+            endGameSound.play();
+        }
+    }, [gameState]);
 
     return (
         <div>

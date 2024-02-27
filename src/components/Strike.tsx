@@ -1,8 +1,12 @@
 import React from 'react';
 
-function Strike() {
+type StrikePropsType = {
+    strikeClass: string
+}
+
+function Strike({strikeClass}: StrikePropsType) {
     return (
-        <div>strike</div>
+        <div className={`strike ${strikeClass}`}></div>
     );
 }
 

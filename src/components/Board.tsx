@@ -9,9 +9,10 @@ type BoardPropsType = {
     tiles: Array<string>
     onTileClick: onTileClickFuncType
     playerTurn: PlayerTurn
+    strikeClass: string
 }
 
-function Board({tiles, onTileClick, playerTurn}: BoardPropsType) {
+function Board({tiles, onTileClick, playerTurn, strikeClass}: BoardPropsType) {
     return (
         <div className="board">
             <Tile playerTurn={playerTurn} onClick={() => onTileClick(0)} value={tiles[0]} className="right-border bottom-border" />
@@ -23,7 +24,7 @@ function Board({tiles, onTileClick, playerTurn}: BoardPropsType) {
             <Tile playerTurn={playerTurn} onClick={() => onTileClick(6)} value={tiles[6]} className="right-border"/>
             <Tile playerTurn={playerTurn} onClick={() => onTileClick(7)} value={tiles[7]} className="right-border"/>
             <Tile playerTurn={playerTurn} onClick={() => onTileClick(8)} value={tiles[8]}/>
-            <Strike />
+            <Strike strikeClass={strikeClass}/>
         </div>
     );
 }

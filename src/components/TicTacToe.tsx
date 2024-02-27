@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Board from "./Board";
 
-enum PlayerTurn {
+export enum PlayerTurn {
     PLAYER_X = 'X',
     PLAYER_O = 'O',
 }
@@ -22,7 +22,7 @@ function TicTacToe() {
     return (
         <div>
             <h1>Tic Tact Toe</h1>
-            <Board tiles={tiles} onTileClick={handleTileClick}/>
+            <Board playerTurn={playerTurn} tiles={tiles} onTileClick={handleTileClick}/>
         </div>
     );
 }

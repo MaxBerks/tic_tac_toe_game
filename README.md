@@ -7,8 +7,8 @@ This project is a simple yet engaging Tic Tac Toe game built with React. It's de
 To get started with this project, clone the repository and install the dependencies.
 
 ```bash
-git clone https://github.com/yourusername/react-tic-tac-toe.git
-cd react-tic-tac-toe
+git clone https://github.com/MaxBerks/tic_tac_toe_game
+cd tic_tac_toe_game
 npm install
 ```
 

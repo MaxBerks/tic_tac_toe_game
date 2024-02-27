@@ -1,9 +1,17 @@
 import React from 'react';
 
-function Tile() {
+type onClickFuncType = () => void
+
+type TilePropsType = {
+    className?: string
+    value: string
+    onClick: onClickFuncType
+}
+
+function Tile({value, className, onClick}: TilePropsType) {
     return (
-        <div className={"tile"}>
-            X
+        <div className={`tile ${className}`} onClick={onClick}>
+            {value}
         </div>
     );
 }

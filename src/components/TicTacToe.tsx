@@ -1,9 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import Board from "./Board";
+import GameOver from "./GameOver";
 
 export enum PlayerTurn {
     PLAYER_X = 'X',
     PLAYER_O = 'O',
+}
+export enum GameState {
+    PLAYER_X_WINS = 0,
+    PLAYER_O_WINS = 1,
+    DRAW = 2,
+    IN_PROGRESS = 3,
 }
 
 const winningCombinations = [
@@ -21,8 +28,9 @@ const winningCombinations = [
 ];
 
 type setStrikeClassFuncType = (strikeClass: string) => void;
+type setGameStateFuncType = (gameState: GameState) => void;
 
-function checkWinner(tiles: Array<string>, setStrikeClass: setStrikeClassFuncType) {
+function checkWinner(tiles: Array<string>, setStrikeClass: setStrikeClassFuncType, setGameState: setGameStateFuncType) {
     for (let {combo, strikeClass} of winningCombinations) {
         const tileValue1 = tiles[combo[0]];
         const tileValue2 = tiles[combo[1]];
@@ -30,16 +38,27 @@ function checkWinner(tiles: Array<string>, setStrikeClass: setStrikeClassFuncTyp
 
         if(tileValue1 !== null && tileValue1 === tileValue2 && tileValue1 === tileValue3) {
             setStrikeClass(strikeClass);
+            if(tileValue1 === PlayerTurn.PLAYER_X) {
+                setGameState(GameState.PLAYER_X_WINS)
+            } else {
+                setGameState(GameState.PLAYER_O_WINS)
+            }
+            return;
         }
     }
+
+    const areAllTileFilledIn = tiles.every(tile => tile !== null);
+    if(areAllTileFilledIn) setGameState(GameState.DRAW)
 }
 
 function TicTacToe() {
     const [tiles, setTiles] = useState(Array(9).fill(null));
     const [playerTurn, setPlayerTurn] = useState(PlayerTurn.PLAYER_X);
     const [strikeClass, setStrikeClass] = useState("");
+    const [gameState, setGameState] = useState(GameState.IN_PROGRESS);
 
     const handleTileClick = (index: number) => {
+        if(gameState !== GameState.IN_PROGRESS) return;
         if(tiles[index] !== null) return;
 
         const newTiles = [...tiles];
@@ -49,13 +68,14 @@ function TicTacToe() {
     }
 
     useEffect(() => {
-        checkWinner(tiles, setStrikeClass);
+        checkWinner(tiles, setStrikeClass, setGameState);
     }, [tiles]);
 
     return (
         <div>
             <h1>Tic Tact Toe</h1>
             <Board playerTurn={playerTurn} tiles={tiles} onTileClick={handleTileClick} strikeClass={strikeClass}/>
+            <GameOver gameState={gameState}/>
         </div>
     );
 }

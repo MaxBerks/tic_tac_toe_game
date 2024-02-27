@@ -1,6 +1,5 @@
 import React from 'react';
 import {PlayerTurn} from "./TicTacToe";
-import {hover} from "@testing-library/user-event/dist/hover";
 
 type onClickFuncType = () => void
 
